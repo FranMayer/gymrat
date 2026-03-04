@@ -1,0 +1,92 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.layout.aggression {
+  --color-surface: #0f0f0f;
+  --color-border: #1a1a1a;
+}
+
+.layout.aggression .header {
+  border-bottom-color: var(--color-primary);
+}
+
+.layout.aggression .brand {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.layout.aggression .link.active {
+  background: transparent;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
+}
+
+.brand {
+  font-family: var(--font-condensed);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.link:hover {
+  background: #1f1f22;
+  color: var(--color-text-main);
+  box-shadow: 0 0 10px rgba(193, 18, 31, 0.25);
+}
+
+.link.active {
+  background: rgba(193, 18, 31, 0.15);
+  color: var(--color-primary);
+}
+
+.devLink {
+  margin-left: auto;
+  color: var(--color-primary);
+}
+
+.main {
+  flex: 1;
+  padding: 1.25rem;
+  background: var(--color-bg);
+}

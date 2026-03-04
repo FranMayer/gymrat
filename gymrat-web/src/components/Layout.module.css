@@ -1,0 +1,40 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  flex-wrap: wrap;
+}
+
+.link,
+.devLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.link:hover,
+.devLink:hover {
+  background: #1f1f22;
+  box-shadow: 0 0 10px rgba(193, 18, 31, 0.35);
+  color: var(--color-text-main);
+}
+
+.devLink {
+  color: var(--color-primary);
+  margin-left: auto;
+}
+
+.main {
+  flex: 1;
+  padding: 1.25rem;
+  background: var(--color-bg);
+}

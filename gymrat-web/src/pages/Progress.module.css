@@ -1,0 +1,124 @@
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-condensed);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.secondary,
+.error {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.error {
+  color: var(--color-primary);
+}
+
+.streakSection {
+  margin-bottom: 1rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat {
+  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.lastDate {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.levelSection {
+  margin-top: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-Rat {
+  background: rgba(156, 163, 175, 0.2);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.badge-AlphaRat {
+  background: rgba(193, 18, 31, 0.2);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.badge-WarRat {
+  background: rgba(193, 18, 31, 0.35);
+  color: #ff6b6b;
+  border: 1px solid var(--color-primary);
+}
+
+.badge-ApexRat {
+  background: linear-gradient(135deg, rgba(193, 18, 31, 0.4), rgba(255, 42, 42, 0.2));
+  color: #ff2a2a;
+  border: 1px solid var(--color-primary-hover);
+}
+
+.nextLevel {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0.5rem 0;
+}
+
+.progressBar {
+  height: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}

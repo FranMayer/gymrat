@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Gymrat",
+    "slug": "gymrat",
+    "version": "1.0.0",
+    "scheme": "gymrat",
+    "orientation": "portrait",
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-asset"
+    ]
+  }
+}

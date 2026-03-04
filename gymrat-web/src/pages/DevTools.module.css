@@ -1,0 +1,73 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section h2 {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.pre {
+  background: #101014;
+  color: var(--color-text-main);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  overflow: auto;
+  max-height: 200px;
+}
+
+.error {
+  color: var(--color-primary-hover);
+  margin-bottom: 0.5rem;
+}
+
+.button,
+.dangerButton {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button {
+  background: var(--color-surface);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.button:hover:not(:disabled) {
+  background: #1f1f22;
+  box-shadow: 0 0 8px rgba(193, 18, 31, 0.35);
+}
+
+.dangerButton {
+  background: var(--color-primary);
+  color: var(--color-text-main);
+}
+
+.dangerButton:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 12px rgba(193, 18, 31, 0.7);
+}
+
+.button:disabled,
+.dangerButton:disabled {
+  opacity: 0.7;
+}
