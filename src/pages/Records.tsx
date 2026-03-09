@@ -47,9 +47,9 @@ export function Records() {
 
   const thresholds = [0, 200, 400, 600, 800, 1000];
   const currentIndex =
-    thresholds.findLastIndex((t) => score >= t) === -1
+    thresholds.findLastIndex((t: number) => score >= t) === -1
       ? 0
-      : thresholds.findLastIndex((t) => score >= t);
+      : thresholds.findLastIndex((t: number) => score >= t);
   const currentMin = thresholds[currentIndex] ?? 0;
   const nextThreshold = thresholds[currentIndex + 1] ?? 1000;
   const progressToNext =
