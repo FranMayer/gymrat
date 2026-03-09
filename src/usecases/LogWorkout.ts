@@ -1,7 +1,3 @@
-/**
- * Caso de uso: registrar un entrenamiento (peso real, repeticiones, fecha).
- */
-
 import type { WorkoutLogEntry, WorkoutLogSet } from '@/domain/entities';
 import type { IWorkoutLogRepository } from '@/domain/repositories';
 
@@ -15,7 +11,10 @@ export interface LogWorkoutInput {
   notes?: string;
 }
 
-export async function logWorkout(repo: IWorkoutLogRepository, input: LogWorkoutInput): Promise<void> {
+export async function logWorkout(
+  repo: IWorkoutLogRepository,
+  input: LogWorkoutInput
+): Promise<void> {
   const entry: WorkoutLogEntry = {
     id: `${input.exerciseId}_${input.date}_${Date.now()}`,
     routineId: input.routineId,

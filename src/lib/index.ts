@@ -1,6 +1,3 @@
-/**
- * Barrel: utilidades y helpers.
- */
-
+export * from './config';
 export * from './logger';
 export * from './prettyPrintJSON';

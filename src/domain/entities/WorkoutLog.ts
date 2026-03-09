@@ -1,6 +1,5 @@
 /**
- * Entidad: Registro de un entrenamiento realizado.
- * Almacena peso real, repeticiones y fecha por ejercicio/serie.
+ * Entidades: registros de entrenamiento.
  */
 
 export interface WorkoutLogSet {
@@ -16,13 +15,10 @@ export interface WorkoutLogEntry {
   exerciseId: string;
   exerciseName: string;
   sets: WorkoutLogSet[];
-  /** Fecha del entrenamiento (ISO string) */
   date: string;
-  /** Notas opcionales */
   notes?: string;
 }
 
-/** Agrupación por sesión de entrenamiento (una fecha, un día de rutina) */
 export interface WorkoutSession {
   id: string;
   routineId: string;

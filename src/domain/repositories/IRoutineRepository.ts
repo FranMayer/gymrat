@@ -1,7 +1,3 @@
-/**
- * Puerto: contrato para persistencia de rutinas.
- */
-
 import type { Routine } from '../entities';
 
 export interface IRoutineRepository {

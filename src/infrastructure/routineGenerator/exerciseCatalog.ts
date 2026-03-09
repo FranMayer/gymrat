@@ -1,15 +1,9 @@
-/**
- * Catálogo estático de ejercicios por grupo muscular.
- * Pensado para ampliación: se puede mover a SQLite o a un JSON externo.
- */
-
 export interface CatalogExercise {
   id: string;
   name: string;
   muscleGroup: string;
 }
 
-/** Ejercicios básicos por grupo (id, nombre, grupo) */
 export const EXERCISE_CATALOG: CatalogExercise[] = [
   { id: 'bench_press', name: 'Press banca', muscleGroup: 'pectorales' },
   { id: 'incline_dumbbell', name: 'Press inclinado con mancuernas', muscleGroup: 'pectorales' },

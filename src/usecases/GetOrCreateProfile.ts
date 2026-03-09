@@ -1,8 +1,3 @@
-/**
- * Caso de uso: obtener el perfil de usuario o devolver uno por defecto (no persistido).
- * La UI puede usar el resultado para mostrar/editar y luego guardar.
- */
-
 import type { UserProfile } from '@/domain/entities';
 import type { IUserProfileRepository } from '@/domain/repositories';
 

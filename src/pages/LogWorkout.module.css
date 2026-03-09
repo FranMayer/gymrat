@@ -1,0 +1,181 @@
+.page {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.progressBlock {
+  background: var(--color-surface);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.progressSummary {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-main);
+}
+
+.progressBarTrack {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 4px;
+  transition: width 0.25s ease;
+}
+
+.exerciseStatusList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.exerciseStatusItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.85rem;
+}
+
+.exerciseStatusItem[data-status='completed'] {
+  color: var(--color-success, #22c55e);
+}
+
+.exerciseStatusItem[data-status='inProgress'] {
+  color: var(--color-warning, #eab308);
+}
+
+.exerciseStatusItem[data-status='pending'] {
+  color: var(--color-text-muted, #888);
+}
+
+.exerciseStatusIcon {
+  flex-shrink: 0;
+}
+
+.exerciseStatusName {
+  flex: 1;
+  font-weight: 500;
+}
+
+.exerciseStatusLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+.exerciseCardIcon {
+  margin-right: 0.35rem;
+}
+
+.exerciseCard[data-status='completed'] {
+  border-left: 3px solid var(--color-success, #22c55e);
+}
+
+.exerciseCard[data-status='inProgress'] {
+  border-left: 3px solid var(--color-warning, #eab308);
+}
+
+.exerciseCard[data-status='pending'] {
+  border-left: 3px solid transparent;
+}
+
+.finishedMessage {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-success, #22c55e);
+  padding: 1rem;
+  margin: 0;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: var(--color-surface);
+  color: var(--color-text-main);
+}
+
+.exerciseCard {
+  background: var(--color-surface);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.exerciseCard h3 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.setRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.setRow input {
+  width: 80px;
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: #101014;
+  color: var(--color-text-main);
+}
+
+.setRow input:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.saveButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-primary);
+  color: var(--color-text-main);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  box-shadow: 0 0 12px rgba(193, 18, 31, 0.6);
+}
+
+.saveButton:disabled {
+  opacity: 0.7;
+}

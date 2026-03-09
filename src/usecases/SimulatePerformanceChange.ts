@@ -1,8 +1,3 @@
-/**
- * Caso de uso (dev): inserta sesiones mock que simulan mejora o empeoramiento de rendimiento.
- * Aumento: pesos crecientes en el tiempo. Disminución: pesos decrecientes.
- */
-
 import type { WorkoutLogSet } from '@/domain/entities';
 import type { IRoutineRepository, IWorkoutLogRepository } from '@/domain/repositories';
 
@@ -10,7 +5,6 @@ export type PerformanceTrend = 'up' | 'down';
 
 export interface SimulatePerformanceChangeInput {
   trend: PerformanceTrend;
-  /** Número de sesiones a generar (cada una con peso mayor o menor que la anterior) */
   sessionsCount?: number;
 }
 

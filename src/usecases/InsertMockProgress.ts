@@ -1,13 +1,7 @@
-/**
- * Caso de uso (dev): inserta N sesiones de entrenamiento mock para una rutina existente.
- * Usa el primer día de la rutina y genera entradas con fechas pasadas.
- */
-
 import type { WorkoutLogSet } from '@/domain/entities';
 import type { IRoutineRepository, IWorkoutLogRepository } from '@/domain/repositories';
 
 export interface InsertMockProgressInput {
-  /** Número de sesiones a insertar (fechas hacia atrás) */
   sessionsCount?: number;
 }
 

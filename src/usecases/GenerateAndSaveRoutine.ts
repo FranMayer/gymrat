@@ -1,7 +1,3 @@
-/**
- * Caso de uso: generar una rutina según objetivo y nivel y guardarla en SQLite.
- */
-
 import type { IRoutineGenerator } from '@/domain/services/IRoutineGenerator';
 import type { IRoutineRepository } from '@/domain/repositories';
 import type { Objective, Level } from '@/domain/entities';

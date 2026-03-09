@@ -1,8 +1,3 @@
-/**
- * Formatea un objeto como JSON legible para pantalla o logs.
- * Evita fallos con valores no serializables (ej. funciones).
- */
-
 export function prettyPrintJSON(value: unknown, indent = 2): string {
   try {
     if (value === undefined) return 'undefined';
