@@ -55,5 +55,9 @@ export class LocalStoragePRRepository implements IPRRepository {
   async saveWeeklyVolumePR(pr: WeeklyVolumePR): Promise<void> {
     writeWeeklyVolumePR(pr);
   }
-}
 
+  async clearAll(): Promise<void> {
+    localStorage.removeItem(STORAGE_KEYS.exercisePRs);
+    localStorage.removeItem(STORAGE_KEYS.weeklyVolumePR);
+  }
+}

@@ -5,5 +5,6 @@ export interface IPRRepository {
   saveExercisePR(pr: ExercisePR): Promise<void>;
   getWeeklyVolumePR(): Promise<WeeklyVolumePR | null>;
   saveWeeklyVolumePR(pr: WeeklyVolumePR): Promise<void>;
+  clearAll(): Promise<void>;
 }
 

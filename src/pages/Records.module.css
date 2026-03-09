@@ -12,6 +12,22 @@
   letter-spacing: 0.02em;
 }
 
+.resetButton {
+  margin-bottom: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.resetButton:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
 .sectionTitle {
   font-size: 1rem;
   font-weight: 600;

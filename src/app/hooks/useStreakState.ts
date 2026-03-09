@@ -9,6 +9,7 @@ export interface StreakVM {
   state: StreakState | null;
   level: string;
   progressPct: number;
+  reset: () => Promise<void>;
 }
 
 export function useStreakState(): StreakVM {
@@ -37,6 +38,24 @@ export function useStreakState(): StreakVM {
     };
   }, [streakRepo]);
 
+  const reset = async () => {
+    try {
+      setLoading(true);
+      const empty: StreakState = {
+        currentStreakDays: 0,
+        longestStreakDays: 0,
+        lastTrainingDate: null,
+      };
+      await streakRepo.save(empty);
+      setState(empty);
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Error reseteando streak');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const days = state?.currentStreakDays ?? 0;
   return {
     loading,
@@ -44,5 +63,6 @@ export function useStreakState(): StreakVM {
     state,
     level: levelForDays(days),
     progressPct: progressToNextLevel(days),
+    reset,
   };
 }

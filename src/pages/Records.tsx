@@ -1,3 +1,4 @@
+import { useApp } from '@/app/AppContext';
 import { usePRRecords } from '@/app/hooks';
 import type { ExercisePR } from '@/domain/entities';
 import styles from './Records.module.css';
@@ -28,6 +29,7 @@ function metricLabel(metric: ExercisePR['metric']) {
 }
 
 export function Records() {
+  const { prRepo } = useApp();
   const { loading, error, prsByExercise, weeklyVolumePR } = usePRRecords();
 
   if (loading) {
@@ -63,6 +65,20 @@ export function Records() {
   return (
     <div className={styles.wrap}>
       <h1 className={styles.title}>Records</h1>
+      <button
+        type="button"
+        className={styles.resetButton}
+        onClick={async () => {
+          const ok = window.confirm(
+            '¿Resetear todos los PRs (records de ejercicios y volumen semanal)?'
+          );
+          if (!ok) return;
+          await prRepo.clearAll();
+          window.location.reload();
+        }}
+      >
+        Resetear PRs
+      </button>
 
       {weeklyVolumePR && (
         <section className={styles.weeklySection}>
