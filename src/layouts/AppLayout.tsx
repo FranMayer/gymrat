@@ -11,7 +11,7 @@ export function AppLayout() {
     <div className={layoutClass}>
       <header className={styles.header}>
         <img
-          src="/logo.png"
+          src="/Logo.png"
           alt="Gymrat"
           className={styles.logo}
         />
