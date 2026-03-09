@@ -24,7 +24,11 @@ export function useAggressionMode() {
   const toggle = async () => {
     const current = await userSettingsRepo.get();
     const next = !current?.aggressionMode;
-    await userSettingsRepo.save({ aggressionMode: next });
+    await userSettingsRepo.save({
+      aggressionMode: next,
+      routineStartDate: current?.routineStartDate,
+      activeRoutineId: current?.activeRoutineId,
+    });
     setEnabled(next);
   };
 

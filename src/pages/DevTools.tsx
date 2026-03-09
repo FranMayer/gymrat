@@ -17,7 +17,8 @@ import styles from './DevTools.module.css';
 
 export function DevTools() {
   const navigate = useNavigate();
-  const { userProfileRepo, routineRepo, workoutLogRepo, routineGenerator } = useApp();
+  const { userProfileRepo, routineRepo, workoutLogRepo, routineGenerator, userSettingsRepo } =
+    useApp();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [lastRoutine, setLastRoutine] = useState<Routine | null>(null);
   const [lastSession, setLastSession] = useState<WorkoutSession | null>(null);
@@ -106,10 +107,12 @@ export function DevTools() {
             run('Regenerar rutina', async () => {
               const objective = profile?.objective ?? 'tonificar';
               const level = profile?.level ?? 'principiante';
-              await generateAndSaveRoutine(routineGenerator, routineRepo, {
-                objective,
-                level,
-              });
+              await generateAndSaveRoutine(
+                routineGenerator,
+                routineRepo,
+                userSettingsRepo,
+                { objective, level }
+              );
             })
           }
           disabled={loading !== null}

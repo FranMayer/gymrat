@@ -1,5 +1,5 @@
 import { useApp } from '@/app/AppContext';
-import { usePRRecords } from '@/app/hooks';
+import { usePRRecords, useStrengthScore } from '@/app/hooks';
 import type { ExercisePR } from '@/domain/entities';
 import styles from './Records.module.css';
 
@@ -31,6 +31,29 @@ function metricLabel(metric: ExercisePR['metric']) {
 export function Records() {
   const { prRepo } = useApp();
   const { loading, error, prsByExercise, weeklyVolumePR } = usePRRecords();
+  const {
+    loading: scoreLoading,
+    error: scoreError,
+    score,
+  } = useStrengthScore();
+
+  const labelForScore = (value: number): string => {
+    if (value < 200) return 'Novato';
+    if (value < 400) return 'Intermedio';
+    if (value < 600) return 'Avanzado';
+    if (value < 800) return 'Elite';
+    return 'Legendario';
+  };
+
+  const thresholds = [0, 200, 400, 600, 800, 1000];
+  const currentIndex =
+    thresholds.findLastIndex((t) => score >= t) === -1
+      ? 0
+      : thresholds.findLastIndex((t) => score >= t);
+  const currentMin = thresholds[currentIndex] ?? 0;
+  const nextThreshold = thresholds[currentIndex + 1] ?? 1000;
+  const progressToNext =
+    nextThreshold > currentMin ? (score - currentMin) / (nextThreshold - currentMin) : 0;
 
   if (loading) {
     return (
@@ -65,6 +88,33 @@ export function Records() {
   return (
     <div className={styles.wrap}>
       <h1 className={styles.title}>Records</h1>
+      <section className={styles.strengthSection}>
+        <div className={styles.strengthCard}>
+          <div className={styles.strengthHeader}>
+            <span className={styles.strengthLabelText}>Strength Score</span>
+            {!scoreLoading && <span className={styles.strengthLevel}>{labelForScore(score)}</span>}
+          </div>
+          <div className={styles.strengthMain}>
+            {scoreLoading ? (
+              <span className={styles.secondary}>Calculando...</span>
+            ) : scoreError ? (
+              <span className={styles.error}>{scoreError}</span>
+            ) : (
+              <span className={styles.strengthScore}>{score}</span>
+            )}
+          </div>
+          <div className={styles.strengthProgressBar}>
+            <div
+              className={styles.strengthProgressFill}
+              style={{ width: `${Math.round(Math.max(0, Math.min(1, progressToNext)) * 100)}%` }}
+            />
+          </div>
+          <div className={styles.strengthRange}>
+            <span>{currentMin}</span>
+            <span>{nextThreshold}</span>
+          </div>
+        </div>
+      </section>
       <button
         type="button"
         className={styles.resetButton}

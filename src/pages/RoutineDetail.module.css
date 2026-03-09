@@ -1,24 +1,29 @@
 .page {
   max-width: 520px;
   margin: 0 auto;
+  padding: 1rem 1rem 1.5rem;
 }
 
 .page h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
 }
 
 .meta {
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
 .dayCard {
-  background: var(--color-surface);
+  background: var(--bg-card);
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
   margin-bottom: 1rem;
 }
 
@@ -33,46 +38,158 @@
   margin: 0 0 0.75rem 0;
 }
 
-.exerciseList li {
-  padding: 0.35rem 0;
-  border-left: 3px solid var(--color-primary);
-  padding-left: 0.5rem;
+.exerciseItem {
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 0.25rem;
 }
 
-.exerciseList li strong {
+.exerciseItem:last-child {
+  border-bottom: none;
+}
+
+.exerciseTrigger {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.exerciseTrigger:hover {
+  background: var(--bg-input);
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  border-radius: 8px;
+}
+
+.exerciseTrigger strong {
+  flex: 1 1 auto;
   display: block;
 }
 
-.exerciseList li span {
+.exerciseMeta {
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
+}
+
+.chevron {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.exerciseDetailWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.exerciseDetailWrapper[data-expanded='true'] {
+  max-height: 420px;
+}
+
+.exerciseDetail {
+  padding: 0 0 0.75rem 0;
+  margin-left: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.exerciseDescription {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.muscleChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.muscleChipPrimary {
+  background: var(--accent);
+  color: var(--bg-page);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.muscleChipSecondary {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.tipsList {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: none;
+}
+
+.tipsList li {
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+
+.tipsList li::before {
+  content: '•';
+  position: absolute;
+  left: -0.85rem;
+  color: var(--accent);
 }
 
 .logLink {
   display: inline-block;
   font-size: 0.9rem;
-  color: var(--color-primary);
+  color: var(--accent);
   text-decoration: none;
 }
 
 .logLink:hover {
   text-decoration: underline;
-  text-shadow: 0 0 6px rgba(193, 18, 31, 0.6);
+  text-shadow: 0 0 6px rgba(204, 255, 0, 0.4);
 }
 
 .backButton {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--color-surface);
-  border: none;
-  border-radius: 6px;
+  background: transparent;
+  border-radius: 999px;
   cursor: pointer;
-  color: var(--color-text-main);
-  border: 1px solid var(--color-border);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 
 .backButton:hover {
-  background: #1f1f22;
-  box-shadow: 0 0 8px rgba(193, 18, 31, 0.25);
+  background: var(--bg-input);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }

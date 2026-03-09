@@ -1,11 +1,15 @@
 .page {
   max-width: 420px;
   margin: 0 auto;
+  padding: 1rem 1rem 1.5rem;
 }
 
 .page h1 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
 }
 
 .field {
@@ -14,9 +18,12 @@
 
 .field label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
 }
 
 .chips {
@@ -27,41 +34,40 @@
 
 .chip,
 .chipActive {
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  border: none;
+  border: 1px solid var(--border);
   font-size: 0.9rem;
   cursor: pointer;
 }
 
 .chip {
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
+  background: var(--bg-input);
+  color: var(--text-secondary);
 }
 
 .chipActive {
-  background: var(--color-primary);
-  color: var(--color-text-main);
-  box-shadow: 0 0 8px rgba(193, 18, 31, 0.45);
+  background: rgba(204, 255, 0, 0.08);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .generateButton {
   width: 100%;
   padding: 0.75rem;
-  background: var(--color-primary);
-  color: var(--color-text-main);
+  background: var(--accent);
+  color: #000000;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   margin-top: 0.5rem;
+  box-shadow: 0 0 12px rgba(204, 255, 0, 0.3);
 }
 
 .generateButton:hover:not(:disabled) {
-  background: var(--color-primary-hover);
-  box-shadow: 0 0 12px rgba(193, 18, 31, 0.6);
+  filter: brightness(0.9);
 }
 
 .generateButton:disabled {

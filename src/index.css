@@ -1,11 +1,30 @@
 :root {
-  --color-bg: #0b0b0d;
-  --color-surface: #151515;
-  --color-primary: #c1121f;
-  --color-primary-hover: #ff2a2a;
-  --color-text-main: #e5e5e5;
-  --color-text-secondary: #9ca3af;
-  --color-border: #2a2a2e;
+  /* Design tokens base */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1e2530;
+  --bg-input: #252d3a;
+
+  --border: #2d3748;
+  --border-subtle: #1e2530;
+
+  --text-primary: #ffffff;
+  --text-secondary: #8892a4;
+  --text-muted: #4a5568;
+
+  --accent: #ccff00;
+  --accent-red: #ff3b3b;
+  --accent-dim: #99cc00;
+
+  /* Backwards-compatible aliases */
+  --color-bg: var(--bg-primary);
+  --color-surface: var(--bg-card);
+  --color-primary: var(--accent);
+  --color-primary-hover: var(--accent-dim);
+  --color-text-main: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+
   --font-condensed: 'Arial Narrow', 'Arial Condensed', system-ui, sans-serif;
 }
 
@@ -18,8 +37,8 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-text-main);
-  background-color: var(--color-bg);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
 }
 

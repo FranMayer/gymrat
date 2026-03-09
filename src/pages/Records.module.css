@@ -1,13 +1,14 @@
 .wrap {
   max-width: 720px;
   margin: 0 auto;
+  padding: 1rem 1rem 1.5rem;
 }
 
 .title {
   font-family: var(--font-condensed);
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--color-text-main);
+  color: var(--accent);
   margin: 0 0 1rem;
   letter-spacing: 0.02em;
 }
@@ -17,37 +18,102 @@
   padding: 0.35rem 0.75rem;
   font-size: 0.8rem;
   border-radius: 999px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--accent-red);
   background: transparent;
-  color: var(--color-text-secondary);
+  color: var(--accent-red);
   cursor: pointer;
 }
 
 .resetButton:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: rgba(255, 59, 59, 0.08);
 }
 
 .sectionTitle {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   margin: 1.5rem 0 0.5rem;
 }
 
 .secondary,
 .empty,
 .error {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
 .error {
-  color: var(--color-primary);
+  color: var(--accent-red);
 }
 
 .weeklySection {
   margin-bottom: 1rem;
+}
+
+.strengthSection {
+  margin-bottom: 1rem;
+}
+
+.strengthCard {
+  padding: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.strengthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.strengthLabelText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.strengthLevel {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.strengthMain {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.strengthScore {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.strengthProgressBar {
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.strengthProgressFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.strengthRange {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 }
 
 .weeklyCard {
@@ -55,15 +121,15 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 1rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
 .weeklyValue {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--accent);
 }
 
 .listSection {
@@ -81,15 +147,15 @@
 
 .card {
   padding: 1rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
 .exerciseId {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-text-main);
+  color: var(--text-primary);
   margin: 0 0 0.5rem;
 }
 
@@ -111,15 +177,15 @@
 }
 
 .metric {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .value {
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--accent);
 }
 
 .date {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-size: 0.85rem;
 }

@@ -10,7 +10,7 @@ const LEVELS: Level[] = ['principiante', 'intermedio', 'avanzado'];
 
 export function GenerateRoutine() {
   const navigate = useNavigate();
-  const { userProfileRepo, routineRepo, routineGenerator } = useApp();
+  const { userProfileRepo, routineRepo, routineGenerator, userSettingsRepo } = useApp();
   const [objective, setObjective] = useState<Objective>('tonificar');
   const [level, setLevel] = useState<Level>('principiante');
   const [loading, setLoading] = useState(false);
@@ -24,10 +24,12 @@ export function GenerateRoutine() {
 
   const handleGenerate = async () => {
     setLoading(true);
-    const { routineId } = await generateAndSaveRoutine(routineGenerator, routineRepo, {
-      objective,
-      level,
-    });
+    const { routineId } = await generateAndSaveRoutine(
+      routineGenerator,
+      routineRepo,
+      userSettingsRepo,
+      { objective, level }
+    );
     setLoading(false);
     navigate(`/routines/${routineId}`);
   };

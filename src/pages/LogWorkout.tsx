@@ -21,13 +21,21 @@ type EntriesState = Record<string, SetInput[]>;
 
 type ExerciseStatus = 'pending' | 'inProgress' | 'completed';
 
+function createSetId(): string {
+  // Fallback seguro para navegadores sin crypto.randomUUID
+  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
 function buildInitialEntries(day: NonNullable<Routine['days'][0]>): EntriesState {
   const state: EntriesState = {};
   for (const ex of day.exercises) {
     state[ex.exerciseId] = Array.from({ length: ex.sets }, () => ({
-      id: crypto.randomUUID(),
-      weight: ex.suggestedWeightKg != null ? String(ex.suggestedWeightKg) : '',
-      reps: ex.reps ? String(ex.reps) : '',
+      id: createSetId(),
+      weight: '',
+      reps: '',
     }));
   }
   return state;
@@ -81,6 +89,31 @@ export function LogWorkout() {
     setEntries(buildInitialEntries(day));
   }, [day]);
 
+  const totalExercises = day?.exercises?.length ?? 0;
+  const statuses = day
+    ? day.exercises.map((ex) => getExerciseStatus(entries, ex.exerciseId))
+    : [];
+  const completedExercises = statuses.filter((s) => s === 'completed').length;
+  const progressPercent =
+    totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+
+  useEffect(() => {
+    if (!day || completedExercises <= prevCompletedCount.current || completedExercises >= totalExercises)
+      return;
+    prevCompletedCount.current = completedExercises;
+    const nextPendingIndex = day.exercises.findIndex(
+      (ex) => getExerciseStatus(entries, ex.exerciseId) !== 'completed'
+    );
+    if (nextPendingIndex === -1) return;
+    const nextEx = day.exercises[nextPendingIndex];
+    const el = nextEx ? exerciseCardRefs.current[nextEx.exerciseId] : null;
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [completedExercises, totalExercises, entries, day]);
+
+  useEffect(() => {
+    prevCompletedCount.current = completedExercises;
+  }, [day?.id, completedExercises]);
+
   const handleUpdateSet = useCallback(
     (exerciseId: string, setId: string, field: 'weight' | 'reps', value: string) => {
       setEntries((prev) => updateSet(prev, exerciseId, setId, field, value));
@@ -124,29 +157,6 @@ export function LogWorkout() {
   };
 
   if (!routine || !day) return <p>Cargando…</p>;
-
-  const totalExercises = day.exercises.length;
-  const statuses = day.exercises.map((ex) => getExerciseStatus(entries, ex.exerciseId));
-  const completedExercises = statuses.filter((s) => s === 'completed').length;
-  const progressPercent =
-    totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
-
-  useEffect(() => {
-    if (completedExercises <= prevCompletedCount.current || completedExercises >= totalExercises)
-      return;
-    prevCompletedCount.current = completedExercises;
-    const nextPendingIndex = day.exercises.findIndex(
-      (ex) => getExerciseStatus(entries, ex.exerciseId) !== 'completed'
-    );
-    if (nextPendingIndex === -1) return;
-    const nextEx = day.exercises[nextPendingIndex];
-    const el = nextEx ? exerciseCardRefs.current[nextEx.exerciseId] : null;
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [completedExercises, totalExercises, entries, day.exercises]);
-
-  useEffect(() => {
-    prevCompletedCount.current = completedExercises;
-  }, [day?.id]);
 
   return (
     <div className={styles.page}>

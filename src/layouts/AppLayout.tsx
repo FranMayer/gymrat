@@ -4,19 +4,32 @@ import { IS_DEV } from '@/lib';
 import styles from './AppLayout.module.css';
 
 export function AppLayout() {
-  const { enabled: aggressionMode } = useAggressionMode();
+  const { enabled: aggressionMode, loading, toggle } = useAggressionMode();
   const layoutClass = aggressionMode ? `${styles.layout} ${styles.aggression}` : styles.layout;
 
   return (
     <div className={layoutClass}>
       <header className={styles.header}>
         <img
-          src="/favicon.svg"
-          alt=""
+          src="/logo.png"
+          alt="Gymrat"
           className={styles.logo}
-          aria-hidden
         />
         <h1 className={styles.brand}>GYMRAT</h1>
+        <button
+          type="button"
+          className={
+            aggressionMode
+              ? `${styles.aggressionToggle} ${styles.aggressionToggleActive}`
+              : styles.aggressionToggle
+          }
+          onClick={toggle}
+          disabled={loading}
+          aria-pressed={aggressionMode}
+          aria-label="Toggle Aggression Mode"
+        >
+          🔥
+        </button>
       </header>
       <nav className={styles.nav}>
         <NavLink

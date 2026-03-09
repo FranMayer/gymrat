@@ -60,5 +60,9 @@ export interface PostWorkoutSummary {
 
 export interface UserSettings {
   aggressionMode: boolean;
+  /** Fecha de inicio de la rutina activa (ISO date YYYY-MM-DD). Se guarda al generar o activar una rutina. */
+  routineStartDate?: string;
+  /** Id de la rutina considerada activa para el cálculo "hoy toca". */
+  activeRoutineId?: string;
 }
 
