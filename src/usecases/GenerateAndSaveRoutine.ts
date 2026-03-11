@@ -5,6 +5,7 @@ import type { Objective, Level } from '@/domain/entities';
 export interface GenerateAndSaveRoutineInput {
   objective: Objective;
   level: Level;
+  daysPerWeek: 3 | 4 | 5 | 6;
   name?: string;
 }
 
@@ -25,6 +26,7 @@ export async function generateAndSaveRoutine(
   const routine = await generator.generate({
     objective: input.objective,
     level: input.level,
+    daysPerWeek: input.daysPerWeek,
     name: input.name,
   });
   await routineRepo.save(routine);

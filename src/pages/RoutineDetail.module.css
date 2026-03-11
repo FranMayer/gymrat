@@ -71,9 +71,23 @@
   border-radius: 8px;
 }
 
-.exerciseTrigger strong {
+.exerciseTriggerTitle {
   flex: 1 1 auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.exerciseTrigger strong {
+  display: inline;
+}
+
+.modifiedBadge {
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: var(--text-muted);
+  text-transform: lowercase;
 }
 
 .exerciseMeta {
@@ -165,6 +179,230 @@
   position: absolute;
   left: -0.85rem;
   color: var(--accent);
+}
+
+.replaceButton {
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.replaceButton:hover {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+/* —— Toast —— */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(204, 255, 0, 0.4);
+  z-index: 100;
+  animation: toastIn 0.2s ease-out;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* —— Replace modal / drawer —— */
+.replaceBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 90;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.replaceDrawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 85vh;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1.5rem;
+  padding-top: 0.5rem;
+  animation: drawerUp 0.25s ease-out;
+}
+
+@keyframes drawerUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.replaceDrawerHandle {
+  width: 2.5rem;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0.5rem auto 0.75rem;
+}
+
+.replaceDrawerTitle {
+  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  color: var(--text-primary);
+}
+
+.replaceSearch {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  outline: none;
+}
+
+.replaceSearch:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(204, 255, 0, 0.2);
+}
+
+.replaceChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.replaceChip,
+.replaceChipActive {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.replaceChip:hover {
+  color: var(--text-primary);
+}
+
+.replaceChipActive {
+  background: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
+}
+
+.replaceList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.replaceList li {
+  margin-bottom: 0.35rem;
+}
+
+.replaceCard {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.replaceCard:hover {
+  background: var(--bg-input);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(204, 255, 0, 0.15);
+}
+
+.replaceCardName {
+  display: block;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.replaceCardMuscle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-right: 0.5rem;
+}
+
+.replaceCardBadge {
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+}
+
+.replaceEmpty {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+}
+
+.replaceCancel {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.replaceCancel:hover {
+  background: var(--bg-input);
 }
 
 .logLink {

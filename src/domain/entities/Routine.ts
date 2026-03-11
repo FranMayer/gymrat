@@ -11,6 +11,8 @@ export interface RoutineExercise {
   reps: number;
   suggestedWeightKg: number | null;
   order: number;
+  /** True si el usuario reemplazó este ejercicio por otro del catálogo. */
+  replaced?: boolean;
 }
 
 export interface RoutineDay {

@@ -30,6 +30,7 @@ export class RoutineEngineAdapter implements IRoutineGenerator {
       exerciseCatalog: this.exerciseCatalog,
       lastEntryByExercise,
       name: input.name,
+      daysPerWeek: input.daysPerWeek,
     });
   }
 

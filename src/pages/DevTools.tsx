@@ -111,7 +111,7 @@ export function DevTools() {
                 routineGenerator,
                 routineRepo,
                 userSettingsRepo,
-                { objective, level }
+                { objective, level, daysPerWeek: 4 }
               );
             })
           }

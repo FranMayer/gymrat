@@ -23,19 +23,44 @@ export interface RoutineEngineInput {
   lastEntryByExercise: Map<string, WorkoutLogEntry>;
   /** Nombre opcional para la rutina. */
   name?: string;
+  /** Días de entrenamiento por semana. Controla el split de la rutina. */
+  daysPerWeek: 3 | 4 | 5 | 6;
 }
 
-const DAY_TEMPLATES_3: { name: string; muscleGroups: string[] }[] = [
-  { name: 'Día A - Pecho y tríceps', muscleGroups: ['pectorales', 'tríceps'] },
-  { name: 'Día B - Espalda y bíceps', muscleGroups: ['espalda', 'bíceps'] },
-  { name: 'Día C - Piernas y hombros', muscleGroups: ['piernas', 'hombros', 'core'] },
+type DayTemplate = { name: string; muscleGroups: string[] };
+
+const DAY_TEMPLATES_3: DayTemplate[] = [
+  // Push / Pull / Legs
+  { name: 'Día A - Push (pecho / hombros / tríceps)', muscleGroups: ['pectorales', 'hombros', 'tríceps'] },
+  { name: 'Día B - Pull (espalda / bíceps / core)', muscleGroups: ['espalda', 'bíceps', 'core'] },
+  { name: 'Día C - Piernas y core', muscleGroups: ['piernas', 'core'] },
 ];
 
-const DAY_TEMPLATES_4: { name: string; muscleGroups: string[] }[] = [
-  { name: 'Día A - Pecho', muscleGroups: ['pectorales'] },
-  { name: 'Día B - Espalda', muscleGroups: ['espalda'] },
-  { name: 'Día C - Piernas', muscleGroups: ['piernas'] },
-  { name: 'Día D - Hombros y brazos', muscleGroups: ['hombros', 'bíceps', 'tríceps', 'core'] },
+const DAY_TEMPLATES_4: DayTemplate[] = [
+  // Pecho+Tríceps / Espalda+Bíceps / Piernas / Hombros+Core
+  { name: 'Día A - Pecho y tríceps', muscleGroups: ['pectorales', 'tríceps'] },
+  { name: 'Día B - Espalda y bíceps', muscleGroups: ['espalda', 'bíceps'] },
+  { name: 'Día C - Piernas y core', muscleGroups: ['piernas', 'core'] },
+  { name: 'Día D - Hombros y core', muscleGroups: ['hombros', 'core'] },
+];
+
+const DAY_TEMPLATES_5: DayTemplate[] = [
+  // Pecho / Espalda / Piernas / Hombros / Brazos+Core
+  { name: 'Día 1 - Pecho', muscleGroups: ['pectorales', 'tríceps'] },
+  { name: 'Día 2 - Espalda', muscleGroups: ['espalda', 'bíceps'] },
+  { name: 'Día 3 - Piernas', muscleGroups: ['piernas', 'core'] },
+  { name: 'Día 4 - Hombros', muscleGroups: ['hombros', 'core'] },
+  { name: 'Día 5 - Brazos y core', muscleGroups: ['bíceps', 'tríceps', 'core'] },
+];
+
+const DAY_TEMPLATES_6: DayTemplate[] = [
+  // Push A / Pull A / Legs A / Push B / Pull B / Legs B
+  { name: 'Día 1 - Push A', muscleGroups: ['pectorales', 'hombros', 'tríceps'] },
+  { name: 'Día 2 - Pull A', muscleGroups: ['espalda', 'bíceps', 'core'] },
+  { name: 'Día 3 - Piernas A', muscleGroups: ['piernas', 'core'] },
+  { name: 'Día 4 - Push B', muscleGroups: ['pectorales', 'hombros', 'tríceps'] },
+  { name: 'Día 5 - Pull B', muscleGroups: ['espalda', 'bíceps', 'core'] },
+  { name: 'Día 6 - Piernas B', muscleGroups: ['piernas', 'core'] },
 ];
 
 function randomId(): string {
@@ -49,9 +74,32 @@ export class RoutineEngine {
   ) {}
 
   generate(input: RoutineEngineInput): Routine {
-    const { profile, exerciseCatalog, lastEntryByExercise, name } = input;
+    const { profile, exerciseCatalog, lastEntryByExercise, name, daysPerWeek } = input;
     const volume = this.volumeStrategy.getVolume(profile.objective, profile.level);
-    const templates = profile.level === 'avanzado' ? DAY_TEMPLATES_4 : DAY_TEMPLATES_3;
+    const normalizedDays: 3 | 4 | 5 | 6 =
+      daysPerWeek === 3 || daysPerWeek === 4 || daysPerWeek === 5 || daysPerWeek === 6
+        ? daysPerWeek
+        : 4;
+
+    let templates: DayTemplate[];
+    switch (normalizedDays) {
+      case 3:
+        templates = DAY_TEMPLATES_3;
+        break;
+      case 4:
+        templates = DAY_TEMPLATES_4;
+        break;
+      case 5:
+        templates = DAY_TEMPLATES_5;
+        break;
+      case 6:
+        templates = DAY_TEMPLATES_6;
+        break;
+      default:
+        templates = DAY_TEMPLATES_4;
+        break;
+    }
+
     const exercisesPerGroup = profile.level === 'principiante' ? 2 : 3;
 
     const days: RoutineDay[] = templates.map((tpl, dayIndex) => {
@@ -83,11 +131,17 @@ export class RoutineEngine {
         }
       }
 
+      // Garantizar entre 4 y 7 ejercicios por día siempre que el catálogo lo permita
+      let normalizedExercises = exercises;
+      if (normalizedExercises.length > 7) {
+        normalizedExercises = normalizedExercises.slice(0, 7);
+      }
+
       return {
         id: dayId,
         name: tpl.name,
         order: dayIndex,
-        exercises,
+        exercises: normalizedExercises,
       };
     });
 

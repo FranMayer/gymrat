@@ -7,12 +7,14 @@ import styles from './GenerateRoutine.module.css';
 
 const OBJECTIVES: Objective[] = ['tonificar', 'adelgazar', 'ganar_masa'];
 const LEVELS: Level[] = ['principiante', 'intermedio', 'avanzado'];
+const DAYS: (3 | 4 | 5 | 6)[] = [3, 4, 5, 6];
 
 export function GenerateRoutine() {
   const navigate = useNavigate();
   const { userProfileRepo, routineRepo, routineGenerator, userSettingsRepo } = useApp();
   const [objective, setObjective] = useState<Objective>('tonificar');
   const [level, setLevel] = useState<Level>('principiante');
+  const [daysPerWeek, setDaysPerWeek] = useState<3 | 4 | 5 | 6>(4);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export function GenerateRoutine() {
       routineGenerator,
       routineRepo,
       userSettingsRepo,
-      { objective, level }
+      { objective, level, daysPerWeek }
     );
     setLoading(false);
     navigate(`/routines/${routineId}`);
@@ -63,6 +65,21 @@ export function GenerateRoutine() {
               onClick={() => setLevel(l)}
             >
               {l}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className={styles.field}>
+        <label>Días por semana</label>
+        <div className={styles.chips}>
+          {DAYS.map((d) => (
+            <button
+              key={d}
+              type="button"
+              className={daysPerWeek === d ? styles.chipActive : styles.chip}
+              onClick={() => setDaysPerWeek(d)}
+            >
+              {d} días
             </button>
           ))}
         </div>
