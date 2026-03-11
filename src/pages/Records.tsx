@@ -61,7 +61,7 @@ export function Records() {
   if (loading) {
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>Records</h1>
+        <h1 className={styles.title}>Récords</h1>
         <p className={styles.secondary}>Cargando...</p>
       </div>
     );
@@ -70,7 +70,7 @@ export function Records() {
   if (error) {
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>Records</h1>
+        <h1 className={styles.title}>Récords</h1>
         <p className={styles.error}>{error}</p>
       </div>
     );
@@ -82,7 +82,7 @@ export function Records() {
   if (empty) {
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>Records</h1>
+        <h1 className={styles.title}>Récords</h1>
         <p className={styles.empty}>Aún no hay PRs. Registra entrenamientos para ver tus récords.</p>
       </div>
     );
@@ -90,11 +90,11 @@ export function Records() {
 
   return (
     <div className={styles.wrap}>
-      <h1 className={styles.title}>Records</h1>
+      <h1 className={styles.title}>Récords</h1>
       <section className={styles.strengthSection}>
         <div className={styles.strengthCard}>
           <div className={styles.strengthHeader}>
-            <span className={styles.strengthLabelText}>Strength Score</span>
+            <span className={styles.strengthLabelText}>Puntaje de fuerza</span>
             {!scoreLoading && <span className={styles.strengthLevel}>{labelForScore(score)}</span>}
           </div>
           <div className={styles.strengthMain}>

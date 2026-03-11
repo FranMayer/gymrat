@@ -37,6 +37,12 @@
   color: var(--text-primary);
 }
 
+.error {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--accent-red);
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;

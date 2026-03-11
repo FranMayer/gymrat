@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useStreakState, useExerciseProgress } from '@/app/hooks';
 import { nextThreshold } from '@/app/hooks/streakLevels';
+import { RatNovice } from '@/assets/illustrations/RatNovice';
+import { RatAlpha } from '@/assets/illustrations/RatAlpha';
+import { RatWar } from '@/assets/illustrations/RatWar';
+import { RatApex } from '@/assets/illustrations/RatApex';
 import styles from './Progress.module.css';
 
 function formatDate(s: string | null) {
@@ -32,6 +36,20 @@ function levelLabel(level: string): string {
   }
 }
 
+function RatAvatar({ level }: { level: string }) {
+  switch (level) {
+    case 'AlphaRat':
+      return <RatAlpha className={styles.ratAvatar} />;
+    case 'WarRat':
+      return <RatWar className={styles.ratAvatar} />;
+    case 'ApexRat':
+      return <RatApex className={styles.ratAvatar} />;
+    case 'Rat':
+    default:
+      return <RatNovice className={styles.ratAvatar} />;
+  }
+}
+
 export function Progress() {
   const { loading, error, state, level, progressPct, reset } = useStreakState();
   const {
@@ -55,7 +73,7 @@ export function Progress() {
   if (loading) {
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>Progress</h1>
+        <h1 className={styles.title}>Progreso</h1>
         <p className={styles.secondary}>Cargando...</p>
       </div>
     );
@@ -64,7 +82,7 @@ export function Progress() {
   if (error) {
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>Progress</h1>
+        <h1 className={styles.title}>Progreso</h1>
         <p className={styles.error}>{error}</p>
       </div>
     );
@@ -75,7 +93,7 @@ export function Progress() {
 
   return (
     <div className={styles.wrap}>
-      <h1 className={styles.title}>Progress</h1>
+      <h1 className={styles.title}>Progreso</h1>
 
       <section className={styles.streakSection}>
         <div className={styles.stats}>
@@ -95,22 +113,27 @@ export function Progress() {
 
       <section className={styles.levelSection}>
         <h2 className={styles.sectionTitle}>Nivel</h2>
-        <div className={`${styles.badge} ${styles[`badge-${level}`]}`}>
-          {levelLabel(level)}
-        </div>
-        {level !== 'ApexRat' && (
-          <>
-            <p className={styles.nextLevel}>
-              Siguiente: {levelLabel(next.level)} a {next.minDays} días
-            </p>
-            <div className={styles.progressBar}>
-              <div
-                className={styles.progressFill}
-                style={{ width: `${Math.round(progressPct * 100)}%` }}
-              />
+        <div className={styles.levelContent}>
+          <RatAvatar level={level} />
+          <div>
+            <div className={`${styles.badge} ${styles[`badge-${level}`]}`}>
+              {levelLabel(level)}
             </div>
-          </>
-        )}
+            {level !== 'ApexRat' && (
+              <>
+                <p className={styles.nextLevel}>
+                  Siguiente: {levelLabel(next.level)} a {next.minDays} días
+                </p>
+                <div className={styles.progressBar}>
+                  <div
+                    className={styles.progressFill}
+                    style={{ width: `${Math.round(progressPct * 100)}%` }}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </section>
       <button
         type="button"

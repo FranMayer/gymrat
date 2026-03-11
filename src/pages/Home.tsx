@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '@/app/AppContext';
 import { getOrCreateProfile } from '@/usecases';
-import { calculateBMI } from '@/domain/entities';
+import { calculateBMI, formatObjective, formatLevel } from '@/domain/entities';
+import { HeroBg } from '@/assets/illustrations/HeroBg';
 import type { UserProfile, Routine, RoutineDay } from '@/domain/entities';
 import type { UserSettings } from '@/domain/entities';
 import styles from './Home.module.css';
@@ -60,6 +61,15 @@ export function Home() {
 
   const bmi = profile ? calculateBMI(profile.weightKg, profile.heightCm) : null;
 
+  const greetingText = (() => {
+    if (!profile?.name) return null;
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 12) return `¡Buenos días, ${profile.name}! 💪`;
+    if (hour >= 12 && hour < 18) return `¡Buenas tardes, ${profile.name}! 💪`;
+    if (hour >= 18 && hour < 24) return `¡Buenas noches, ${profile.name}! 💪`;
+    return `¡A entrenar, ${profile.name}! 🔥`;
+  })();
+
   const startDateISO =
     settings?.routineStartDate ??
     activeRoutine?.createdAt?.slice(0, 10) ??
@@ -78,17 +88,21 @@ export function Home() {
 
   return (
     <div className={styles.page}>
-      <h1>Gymrat</h1>
+      {greetingText && <p className={styles.greeting}>{greetingText}</p>}
       {profile && (
         <section className={styles.card}>
-          <h2>Perfil</h2>
-          <p>
-            {profile.age} años · {profile.objective} · {profile.level}
-          </p>
-          {bmi != null && <p className={styles.bmi}>IMC: {bmi}</p>}
-          <Link to="/profile" className={styles.button}>
-            Editar perfil
-          </Link>
+          <HeroBg className={styles.heroIllustration} />
+          <div className={styles.cardContent}>
+            <h2>Perfil</h2>
+            <p>
+              {profile.age} años · {formatObjective(profile.objective)} ·{' '}
+              {formatLevel(profile.level)}
+            </p>
+            {bmi != null && <p className={styles.bmi}>IMC: {bmi}</p>}
+            <Link to="/profile" className={styles.button}>
+              Editar perfil
+            </Link>
+          </div>
         </section>
       )}
 

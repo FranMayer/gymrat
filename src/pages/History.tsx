@@ -4,6 +4,7 @@ import { useApp } from '@/app/AppContext';
 import type { Routine } from '@/domain/entities';
 import type { WorkoutSession } from '@/domain/entities';
 import styles from './History.module.css';
+import { formatObjective, formatLevel } from '@/domain/entities';
 
 export function History() {
   const { routineRepo, workoutLogRepo, prRepo } = useApp();
@@ -30,7 +31,9 @@ export function History() {
       <section className={styles.section}>
         <h2>Rutinas guardadas</h2>
         {routines.length === 0 ? (
-          <p className={styles.empty}>No hay rutinas. Genera una desde el menú.</p>
+          <p className={styles.empty}>
+            Aún no tenés rutinas guardadas. Generá tu primera rutina desde HOME.
+          </p>
         ) : (
           <ul className={styles.list}>
             {routines.map((r) => (
@@ -40,7 +43,7 @@ export function History() {
                     {r.name}
                   </Link>
                   <span className={styles.meta}>
-                    {r.objective} · {r.level} · {r.days.length} días
+                    {formatObjective(r.objective)} · {formatLevel(r.level)} · {r.days.length} días
                   </span>
                 </div>
                 <button

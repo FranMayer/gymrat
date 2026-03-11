@@ -1,5 +1,4 @@
 import { Outlet, Link } from 'react-router-dom';
-import { IS_DEV } from '@/lib';
 import styles from './Layout.module.css';
 
 export function Layout() {
@@ -18,11 +17,6 @@ export function Layout() {
         <Link to="/history" className={styles.link}>
           Historial
         </Link>
-        {IS_DEV && (
-          <Link to="/dev" className={styles.devLink}>
-            DevTools
-          </Link>
-        )}
       </nav>
       <main className={styles.main}>
         <Outlet />

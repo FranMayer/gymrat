@@ -1,17 +1,40 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAggressionMode } from '@/app/hooks';
-import { IS_DEV } from '@/lib';
+import { useApp } from '@/app/AppContext';
 import styles from './AppLayout.module.css';
 
 export function AppLayout() {
+  const { userProfileRepo } = useApp();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { enabled: aggressionMode, loading, toggle } = useAggressionMode();
   const layoutClass = aggressionMode ? `${styles.layout} ${styles.aggression}` : styles.layout;
+
+  useEffect(() => {
+    let cancelled = false;
+    async function ensureProfile() {
+      // No redirigir si ya estamos en la pantalla de perfil
+      if (location.pathname.startsWith('/profile')) return;
+      const profile = await userProfileRepo.get();
+      if (!cancelled && !profile) {
+        navigate('/profile', {
+          replace: true,
+          state: { welcome: true },
+        });
+      }
+    }
+    ensureProfile();
+    return () => {
+      cancelled = true;
+    };
+  }, [location.pathname, userProfileRepo, navigate]);
 
   return (
     <div className={layoutClass}>
       <header className={styles.header}>
         <img
-          src="/Logo.png"
+          src="/logo.png"
           alt="Gymrat"
           className={styles.logo}
         />
@@ -69,16 +92,6 @@ export function AppLayout() {
         >
           HISTORIAL
         </NavLink>
-        {IS_DEV && (
-          <NavLink
-            to="/dev"
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.devLink} ${styles.active}` : `${styles.link} ${styles.devLink}`
-            }
-          >
-            DevTools
-          </NavLink>
-        )}
       </nav>
       <main className={styles.main}>
         <Outlet />

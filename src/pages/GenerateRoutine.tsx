@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/app/AppContext';
 import { getOrCreateProfile, generateAndSaveRoutine } from '@/usecases';
 import type { Objective, Level } from '@/domain/entities';
+import { formatObjective, formatLevel } from '@/domain/entities';
 import styles from './GenerateRoutine.module.css';
 
 const OBJECTIVES: Objective[] = ['tonificar', 'adelgazar', 'ganar_masa'];
@@ -49,7 +50,7 @@ export function GenerateRoutine() {
               className={objective === o ? styles.chipActive : styles.chip}
               onClick={() => setObjective(o)}
             >
-              {o}
+              {formatObjective(o)}
             </button>
           ))}
         </div>
@@ -64,7 +65,7 @@ export function GenerateRoutine() {
               className={level === l ? styles.chipActive : styles.chip}
               onClick={() => setLevel(l)}
             >
-              {l}
+              {formatLevel(l)}
             </button>
           ))}
         </div>

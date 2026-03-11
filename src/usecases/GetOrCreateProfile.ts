@@ -15,6 +15,7 @@ export async function getOrCreateProfile(
   if (existing) return { profile: existing, isNew: false };
   const defaultProfile: UserProfile = {
     id: DEFAULT_ID,
+    name: '',
     age: 25,
     sex: 'otro',
     heightCm: 170,

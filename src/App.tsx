@@ -25,7 +25,8 @@ export function App() {
             <Route path="history" element={<History />} />
             <Route path="records" element={<Records />} />
             <Route path="progress" element={<Progress />} />
-            <Route path="dev" element={<DevTools />} />
+            {/* Ruta de herramientas de desarrollo oculta; solo para uso interno */}
+            <Route path="dev-secret" element={<DevTools />} />
           </Route>
         </Routes>
       </AppProvider>
